@@ -1,0 +1,15 @@
+com\qa\persistence\repository\MovieListRepository.class
+com\qa\service\AccountService.class
+com\qa\exceptions\AccountNotFoundException.class
+com\qa\rest\AccountController.class
+com\qa\service\MovieListService.class
+com\qa\persistence\repository\MovieListDBRepository.class
+com\qa\service\AccountServiceImpl.class
+com\qa\persistence\domain\Account.class
+com\qa\service\MovieListServiceImpl.class
+com\qa\persistence\domain\MovieList.class
+com\qa\util\JSONUtil.class
+com\qa\persistence\repository\AccountRepository.class
+com\qa\persistence\repository\AccountDBRepository.class
+com\qa\rest\JAXActivator.class
+com\qa\rest\MovieListController.class
