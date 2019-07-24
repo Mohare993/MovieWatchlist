@@ -1,7 +1,7 @@
 package com.qa.service;
 
 import com.qa.exceptions.AccountNotFoundException;
-import com.qa.persistence.domain.Account;
+
 
 public interface AccountService {
 	

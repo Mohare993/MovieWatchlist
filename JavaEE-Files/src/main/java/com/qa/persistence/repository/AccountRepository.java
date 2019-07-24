@@ -1,7 +1,7 @@
 package com.qa.persistence.repository;
 
 import com.qa.exceptions.AccountNotFoundException;
-import com.qa.persistence.domain.Account;
+
 
 
 public interface AccountRepository {
@@ -18,6 +18,8 @@ public interface AccountRepository {
 	String updateAccount(int accountId, String account) throws AccountNotFoundException;
 	
 	String login(String account);
+	
+	boolean checkUsername(String account); 
 
 
 }

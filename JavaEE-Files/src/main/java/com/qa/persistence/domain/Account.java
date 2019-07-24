@@ -10,7 +10,7 @@ import javax.persistence.Id;
 public class Account {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	private Integer accountId;
 	@Column(length = 100)
 	private String username;
 	@Column(length = 100)
@@ -20,9 +20,9 @@ public class Account {
 	@Column(length = 100)
 	private String password;
 
-	public Account(Integer id, String username, String email, String fullName, String password) {
+	public Account(Integer accountId, String username, String email, String fullName, String password) {
 		super();
-		this.id = id;
+		this.accountId = accountId;
 		this.username = username;
 		this.email = email;
 		this.fullName = fullName;
@@ -34,11 +34,11 @@ public class Account {
 	}
 
 	public Integer getId() {
-		return id;
+		return accountId;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	public void setId(Integer accountId) {
+		this.accountId = accountId;
 	}
 
 	public String getUsername() {

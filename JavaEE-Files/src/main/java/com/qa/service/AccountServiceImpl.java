@@ -4,7 +4,6 @@ package com.qa.service;
 import javax.inject.Inject;
 
 import com.qa.exceptions.AccountNotFoundException;
-import com.qa.persistence.domain.Account;
 import com.qa.persistence.repository.AccountRepository;
 
 public class AccountServiceImpl implements AccountService {
@@ -19,9 +18,15 @@ public class AccountServiceImpl implements AccountService {
 
 	@Override
 	public String createAccount(String account) {
-		return this.repo.createAccount(account);
-	}
+		if (this.repo.checkUsername(account)== true) {
+			return this.repo.createAccount(account);
 
+		} else {
+
+			return "{\"Success\":\"False\"}";
+		}
+	}
+	
 	@Override
 	public String deleteAccount(int accountId) throws AccountNotFoundException {
 		return this.repo.deleteAccount(accountId);

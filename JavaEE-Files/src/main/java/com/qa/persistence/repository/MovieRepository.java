@@ -2,7 +2,7 @@ package com.qa.persistence.repository;
 
 import com.qa.exceptions.AccountNotFoundException;
 
-public interface MovieListRepository{
+public interface MovieRepository{
 
 		String getAllMovies();
 

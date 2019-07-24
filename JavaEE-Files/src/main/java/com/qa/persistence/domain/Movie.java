@@ -6,7 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class MovieList {
+public class Movie {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,7 +19,7 @@ public class MovieList {
 	private Float imdbRating;
 	private String Poster;
 
-	public MovieList(Integer id, String imdbId, String title, Integer year, String genre, String plot, Float imdbRating,
+	public Movie(Integer id, String imdbId, String title, Integer year, String genre, String plot, Float imdbRating,
 			String poster) {
 		super();
 		this.id = id;
@@ -32,7 +32,7 @@ public class MovieList {
 		this.Poster = poster;
 	}
 
-	public MovieList() {
+	public Movie() {
 
 	}
 
