@@ -3,12 +3,12 @@ package com.qa.service;
 import javax.inject.Inject;
 
 import com.qa.exceptions.AccountNotFoundException;
-import com.qa.persistence.repository.MovieListRepository;
+import com.qa.persistence.repository.MovieRepository;
 
-public class MovieListServiceImpl implements MovieListService {
+public class MovieServiceImpl implements MovieService {
 
 	@Inject
-	private MovieListRepository repo;
+	private MovieRepository repo;
 
 	@Override
 	public String getAllMovies() {

@@ -18,6 +18,8 @@ public interface AccountRepository {
 	String updateAccount(int accountId, String account) throws AccountNotFoundException;
 	
 	String login(String account);
+	
+	boolean checkUsername(String account); 
 
 
 }

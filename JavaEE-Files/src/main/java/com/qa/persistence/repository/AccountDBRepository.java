@@ -80,4 +80,18 @@ public class AccountDBRepository implements AccountRepository {
 		return this.json.getJSONForObject(logacc);
 	}
 
+	@Override
+	public boolean checkUsername(String account) {
+		Account aUser = this.json.getObjectForJSON(account, Account.class);
+		String username = aUser.getUsername();
+		TypedQuery<Account> query = this.manager.createQuery("SELECT u FROM Account u WHERE username='" + username + "'",
+				Account.class);
+		if (query.getResultList().isEmpty()) {
+			return true;
+		} else {
+			return false;
+		}
+
+	}
+
 }

@@ -7,13 +7,14 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 
-import com.qa.service.MovieListService;
 
-@Path("/movielist")
-public class MovieListController {
+import com.qa.service.MovieService;
+
+@Path("/movie")
+public class MovieController {
 
 	@Inject
-	private MovieListService service;
+	private MovieService service;
 
 	@GET
 	@Path("/getAll")
