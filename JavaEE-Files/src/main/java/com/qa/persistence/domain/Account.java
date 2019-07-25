@@ -1,6 +1,5 @@
 package com.qa.persistence.domain;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,19 +9,15 @@ import javax.persistence.Id;
 public class Account {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer accountId;
-	@Column(length = 100)
+	private Long accountId;
+	
 	private String username;
-	@Column(length = 100)
 	private String email;
-	@Column(length = 100)
 	private String fullName;
-	@Column(length = 100)
 	private String password;
 
-	public Account(Integer accountId, String username, String email, String fullName, String password) {
+	public Account(String username, String email, String fullName, String password) {
 		super();
-		this.accountId = accountId;
 		this.username = username;
 		this.email = email;
 		this.fullName = fullName;
@@ -33,11 +28,12 @@ public class Account {
 
 	}
 
-	public Integer getId() {
+	public Long getId() {
 		return accountId;
 	}
-
-	public void setId(Integer accountId) {
+ 
+     
+	public void setId(Long accountId) {
 		this.accountId = accountId;
 	}
 

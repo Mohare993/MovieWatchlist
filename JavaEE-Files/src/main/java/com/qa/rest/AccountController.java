@@ -29,13 +29,13 @@ public class AccountController {
 
 	@DELETE
 	@Path("/delete/{id}")
-	public String deleteAccount(@PathParam("id") int accountId) {
+	public String deleteAccount(@PathParam("id") Long accountId) {
 		return this.service.deleteAccount(accountId);
 	}
 
 	@POST
 	@Path("/update/{id}")
-	public String updateAccount(@PathParam("id") int accountId, String account) {
+	public String updateAccount(@PathParam("id") Long accountId, String account) {
 		return this.service.updateAccount(accountId, account);
 	}
 	

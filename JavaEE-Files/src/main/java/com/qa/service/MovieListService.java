@@ -2,17 +2,16 @@ package com.qa.service;
 
 import javax.inject.Inject;
 
-import com.qa.persistence.repository.ListsDBRepository;
-import com.qa.persistence.repository.ListsRepository;
+import com.qa.persistence.repository.MovieListRepository;
 
-public class ListsServiceImpl implements ListsRepository {
-	
+public class  MovieListService {
+
 	@Inject
-	private ListsDBRepository repo;
+	private MovieListRepository repo;
 
-	public String CreateList(Integer accountId,String listsTodo) {
+	public String CreateList(Long userId,String listsTodo) {
 
-		return this.repo.CreateList(accountId,listsTodo);
+		return this.repo.CreateList(userId,listsTodo);
 	}
 
 	public String getAllLists() {
@@ -30,4 +29,3 @@ public class ListsServiceImpl implements ListsRepository {
 	}
 
 }
-

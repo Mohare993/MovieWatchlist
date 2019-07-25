@@ -28,12 +28,12 @@ public class AccountServiceImpl implements AccountService {
 	}
 	
 	@Override
-	public String deleteAccount(int accountId) throws AccountNotFoundException {
+	public String deleteAccount(Long accountId) throws AccountNotFoundException {
 		return this.repo.deleteAccount(accountId);
 	}
 
 	@Override
-	public String updateAccount(int accountId, String account) throws AccountNotFoundException {
+	public String updateAccount(Long accountId, String account) throws AccountNotFoundException {
 		return this.repo.updateAccount(accountId, account);
 	}
 	
