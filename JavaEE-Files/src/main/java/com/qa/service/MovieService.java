@@ -6,7 +6,7 @@ public interface MovieService {
 	
 	String getAllMovies();
 
-	String createMovie(String movie);
+	String createMovie(Long listId, String movie);
 
 	String deleteMovie(String imdbId) throws AccountNotFoundException;
 

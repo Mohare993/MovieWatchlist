@@ -1,24 +1,24 @@
 package com.qa.rest;
 
 import javax.inject.Inject;
-import javax.websocket.server.PathParam;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 
-import com.qa.service.ListsServiceImpl;
+import com.qa.service. MovieListService;
 
-@Path("/lists")
-public class ListsController {
+@Path("/Lists")
+public class MovieListController {
 	
 	@Inject
-	private ListsServiceImpl serv;
+	private MovieListService serv;
 	
 	@POST
-	@Path("/create/{accountId}")
-	public String CreateList(@PathParam("accountId") Integer accountId,String listsTodo) {
-		return this.serv.CreateList(accountId,listsTodo);
+	@Path("/create/{userId}")
+	public String CreateList(@PathParam("userId") Long userId,String listsTodo) {
+		return this.serv.CreateList(userId,listsTodo);
 	}
 	
 	@GET

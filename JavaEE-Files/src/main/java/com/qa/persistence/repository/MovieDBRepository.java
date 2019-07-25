@@ -10,6 +10,7 @@ import javax.transaction.Transactional.TxType;
 
 import com.qa.exceptions.AccountNotFoundException;
 import com.qa.persistence.domain.Movie;
+import com.qa.persistence.domain.MovieList;
 import com.qa.util.JSONUtil;
 
 @Default
@@ -30,8 +31,10 @@ public class MovieDBRepository implements MovieRepository {
 	
 	@Override
 	@Transactional(value = TxType.REQUIRED)
-	public String createMovie(String movie) {
+	public String createMovie(Long listId, String movie) {
+		MovieList movieOwner = this.manager.find(MovieList.class, listId);
 		Movie toCreate = this.json.getObjectForJSON(movie, Movie.class);
+		toCreate.setMovieList(movieOwner);
 		this.manager.persist(toCreate);
 		return "SUCCESS - Movie created.";
 	}

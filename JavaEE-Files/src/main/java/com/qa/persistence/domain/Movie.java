@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Movie {
@@ -18,9 +19,12 @@ public class Movie {
 	private String Plot;
 	private Float imdbRating;
 	private String Poster;
+	
+	@ManyToOne
+	private MovieList MovieList;
 
 	public Movie(Integer id, String imdbId, String title, Integer year, String genre, String plot, Float imdbRating,
-			String poster) {
+			String poster,Long listId) {
 		super();
 		this.id = id;
 		this.imdbID = imdbId;
@@ -30,6 +34,14 @@ public class Movie {
 		this.Plot = plot;
 		this.imdbRating = imdbRating;
 		this.Poster = poster;
+	}
+
+	public MovieList getMovieList() {
+		return MovieList;
+	}
+
+	public void setMovieList(MovieList movieList) {
+		MovieList = movieList;
 	}
 
 	public Movie() {

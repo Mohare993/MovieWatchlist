@@ -9,9 +9,9 @@ public interface AccountService {
 
 	String createAccount(String account);
 
-	String deleteAccount(int accountId) throws AccountNotFoundException;
+	String deleteAccount(Long accountId) throws AccountNotFoundException;
 
-	String updateAccount(int accountId, String account) throws AccountNotFoundException;
+	String updateAccount(Long accountId, String account) throws AccountNotFoundException;
 	
 	String login(String account);
 

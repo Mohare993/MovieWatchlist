@@ -8,47 +8,48 @@ import javax.transaction.Transactional;
 import javax.transaction.Transactional.TxType;
 
 import com.qa.persistence.domain.Account;
-import com.qa.persistence.domain.Lists;
+import com.qa.persistence.domain.MovieList;
 import com.qa.util.JSONUtil;
 
 @Transactional(value = TxType.REQUIRED)
-public class ListsDBRepository implements ListsRepository{
+public class MovieListRepository {
 
 	@PersistenceContext(unitName = "primary")
 	private EntityManager manager;
 
 	@Inject
 	private JSONUtil gson;
+	
+	
 
-	public String CreateList(Integer accountId, String lists) {
-		Account listOwner = this.manager.find(Account.class, accountId);
-		Lists newList = this.gson.getJSONForObject(lists, Lists.class);
+	public String CreateList(Long userId,String listsTodo) {
+		Account listOwner = this.manager.find(Account.class, userId);
+		MovieList newList = this.gson.getObjectForJSON(listsTodo, MovieList.class);
 		newList.setUser(listOwner);
 		this.manager.persist(newList);
-
-		return "Success for:" + this.gson.getObjectForJSON(lists, Lists.class).getListName();
+		
+		return "Success for:" + this.gson.getObjectForJSON(listsTodo,  MovieList.class).getListName();
 	}
 
 	@Transactional(value = TxType.SUPPORTS)
 	public String getAllLists() {
-		TypedQuery<Lists> query = this.manager.createQuery("SELECT l FROM Lists l", Lists.class);
+		TypedQuery<MovieList> query = this.manager.createQuery("SELECT l FROM ListsTodo l",  MovieList.class);
 		return this.gson.getJSONForObject(query.getResultList());
 	}
-
-	public String updateList(long listId, String lists) {
-		Lists current = this.manager.find(Lists.class, listId);
-		Lists newList = this.gson.getObjectForJSON(lists, Lists.class);
+	
+	
+	public String updateList(long listId, String listsTodo) {
+		 MovieList current = this.manager.find( MovieList.class, listId);
+		 MovieList newList = this.gson.getObjectForJSON(listsTodo, MovieList.class);
 		current.setListName(newList.getListName());
-
+		
 		this.manager.persist(current);
-		return "Success for: " + current.getListName();
+		return "Success for: "+ current.getListName();
 	}
-
+	
 	public String deleteList(long listId) {
-		this.manager.remove(this.manager.find(Lists.class, listId));
+		this.manager.remove(this.manager.find(MovieList.class, listId));
 		return "Deleted List";
 	}
-
-	
 
 }

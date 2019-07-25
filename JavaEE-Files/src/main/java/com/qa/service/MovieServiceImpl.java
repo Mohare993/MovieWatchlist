@@ -16,8 +16,8 @@ public class MovieServiceImpl implements MovieService {
 	}
 
 	@Override
-	public String createMovie(String movie) {
-		return this.repo.createMovie(movie);
+	public String createMovie(Long listId, String movie) {
+		return this.repo.createMovie(listId, movie);
 	}
 
 	@Override

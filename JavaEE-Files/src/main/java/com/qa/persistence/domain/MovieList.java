@@ -7,25 +7,25 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class Lists {
-	
+public class MovieList {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long listId;
 	private String listName;
 
 	@ManyToOne
-	private Account account;
+	private Account user;
 	
 
-	public Lists(long listId, String listName, long accountId) {
+	public MovieList(long listId, String listName, Long userId) {
 		super();
 		this.listId = listId;
 		this.listName = listName;
 
 	}
 
-	public Lists() {
+	public MovieList() {
 
 	}
 
@@ -47,15 +47,13 @@ public class Lists {
 
 	public Account getUser() {
 		
-		return account;
+		return user;
 	}
 	
 	
 
-	public void setUser(Account account) {
-		this.account = account;
+	public void setUser(Account user) {
+		this.user = user;
 	}
 
 }
-
-

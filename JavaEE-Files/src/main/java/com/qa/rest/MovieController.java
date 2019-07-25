@@ -23,9 +23,9 @@ public class MovieController {
 	}
 
 	@POST
-	@Path("/createMovie")
-	public String createAccount(String movie) {
-		return this.service.createMovie(movie);
+	@Path("/createMovie/{listId}")
+	public String createAccount(@PathParam("listId")Long listId, String movie) {
+		return this.service.createMovie(listId, movie);
 	}
 
 	@DELETE
