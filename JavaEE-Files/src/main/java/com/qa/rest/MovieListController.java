@@ -9,7 +9,7 @@ import javax.ws.rs.PathParam;
 
 import com.qa.service. MovieListService;
 
-@Path("/Lists")
+@Path("/lists")
 public class MovieListController {
 	
 	@Inject
@@ -17,8 +17,8 @@ public class MovieListController {
 	
 	@POST
 	@Path("/create/{userId}")
-	public String CreateList(@PathParam("userId") Long userId,String listsTodo) {
-		return this.serv.CreateList(userId,listsTodo);
+	public String CreateList(@PathParam("userId") Long userId,String lists) {
+		return this.serv.CreateList(userId,lists);
 	}
 	
 	@GET
@@ -29,14 +29,19 @@ public class MovieListController {
 	
 	@POST
 	@Path("/update/{listId}")
-	public String updateList(@PathParam("listId") long listId, String listsTodo) {
-		return this.serv.updateList(listId, listsTodo);
+	public String updateList(@PathParam("listId") Long listId, String lists) {
+		return this.serv.updateList(listId, lists);
 	}
 	
 	@DELETE
 	@Path("/delete/{listId}")
-	public String deleteList(@PathParam("listId") long listId) {
+	public String deleteList(@PathParam("listId") Long listId) {
 		return this.serv.deleteList(listId);
 	}
+	
+	@GET
+	@Path("/get/{userId}")
+	public String getAllListsForAcc(@PathParam("userId") Long userId) {
+		return this.serv.getAllListsForAcc(userId);
+}}
 
-}

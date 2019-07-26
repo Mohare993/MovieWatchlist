@@ -25,7 +25,7 @@ public class MovieDBRepository implements MovieRepository {
 
 	@Override
 	public String getAllMovies() {
-		TypedQuery<Movie> query = this.manager.createQuery("SELECT m from MovieList m", Movie.class);
+		TypedQuery<Movie> query = this.manager.createQuery("SELECT m from Movie m", Movie.class);
 		return this.json.getJSONForObject(query.getResultList());
 	}
 	
@@ -41,12 +41,18 @@ public class MovieDBRepository implements MovieRepository {
 	
 	@Override
 	@Transactional(value = TxType.REQUIRED)
-	public String deleteMovie(String imdbId) throws AccountNotFoundException {
-		this.manager.remove(this.manager.find(Movie.class, imdbId));
+	public String deleteMovie(Long listId) throws AccountNotFoundException {
+		TypedQuery<Movie> query = this.manager.createQuery("SELECT m from Movie m WHERE MOVIELIST_LISTID='" + listId + "'",  Movie.class);
+		this.manager.remove(this.manager.find(Movie.class, listId));
+		
 		return "SUCCESS - Movie deleted.";
 	}
 	
-	
+	@Override
+	public String getAllMoviesForList(Long listId) {
+	TypedQuery<Movie> query = this.manager.createQuery("SELECT m from Movie m WHERE MOVIELIST_LISTID='" + listId + "'",  Movie.class);
+	return this.json.getJSONForObject(query.getResultList());
+	}
 
 
 }

@@ -11,14 +11,14 @@ public class MovieList {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long listId;
+	private Long listId;
 	private String listName;
 
 	@ManyToOne
 	private Account user;
 	
 
-	public MovieList(long listId, String listName, Long userId) {
+	public MovieList(Long listId, String listName, Long userId) {
 		super();
 		this.listId = listId;
 		this.listName = listName;
@@ -33,7 +33,7 @@ public class MovieList {
 		return listId;
 	}
 
-	public void setListId(long listId) {
+	public void setListId(Long listId) {
 		this.listId = listId;
 	}
 

@@ -21,33 +21,39 @@ public class MovieListRepository {
 	private JSONUtil gson;
 	
 	
-
-	public String CreateList(Long userId,String listsTodo) {
+	
+	@Transactional(value = TxType.REQUIRED)
+	public String CreateList(Long userId,String lists) {
 		Account listOwner = this.manager.find(Account.class, userId);
-		MovieList newList = this.gson.getObjectForJSON(listsTodo, MovieList.class);
+		MovieList newList = this.gson.getObjectForJSON(lists, MovieList.class);
 		newList.setUser(listOwner);
 		this.manager.persist(newList);
 		
-		return "Success for:" + this.gson.getObjectForJSON(listsTodo,  MovieList.class).getListName();
+		return "Success for:" + this.gson.getObjectForJSON(lists,  MovieList.class).getListName();
 	}
 
-	@Transactional(value = TxType.SUPPORTS)
 	public String getAllLists() {
-		TypedQuery<MovieList> query = this.manager.createQuery("SELECT l FROM ListsTodo l",  MovieList.class);
+		TypedQuery<MovieList> query = this.manager.createQuery("SELECT l FROM MovieList l",  MovieList.class);
 		return this.gson.getJSONForObject(query.getResultList());
 	}
 	
+	public String getAllListsForAcc(Long userId) {
+		TypedQuery<MovieList> query = this.manager.createQuery("SELECT l FROM MovieList l WHERE USER_ACCOUNTID='" + userId + "'",  MovieList.class);
+		return this.gson.getJSONForObject(query.getResultList());
+	}
 	
-	public String updateList(long listId, String listsTodo) {
+	@Transactional(value = TxType.REQUIRED)
+	public String updateList(Long listId, String list) {
 		 MovieList current = this.manager.find( MovieList.class, listId);
-		 MovieList newList = this.gson.getObjectForJSON(listsTodo, MovieList.class);
+		 MovieList newList = this.gson.getObjectForJSON(list, MovieList.class);
 		current.setListName(newList.getListName());
 		
 		this.manager.persist(current);
 		return "Success for: "+ current.getListName();
 	}
 	
-	public String deleteList(long listId) {
+	@Transactional(value = TxType.REQUIRED)
+	public String deleteList(Long listId) {
 		this.manager.remove(this.manager.find(MovieList.class, listId));
 		return "Deleted List";
 	}
