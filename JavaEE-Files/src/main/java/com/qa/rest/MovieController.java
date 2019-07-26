@@ -30,9 +30,15 @@ public class MovieController {
 
 	@DELETE
 	@Path("/delete/{id}")
-	public String deleteMovie(@PathParam("id") String imdbId) {
-		return this.service.deleteMovie(imdbId);
+	public String deleteMovie(@PathParam("id") Long listId) {
+		return this.service.deleteMovie(listId);
 	}
+	
+	@GET
+	@Path("/get/{listId}")
+	public String getAllMoviesForList(@PathParam("listId") Long listId) {
+		return this.service.getAllMoviesForList(listId);
+}
 
 	
 }

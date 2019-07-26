@@ -56,12 +56,17 @@ function handleLogin(form) {
         }
     }
 
-    makeRequest('GET', 'https://us-central1-qac-sandbox.cloudfunctions.net/login?username=' + loginData.username + "&" + "password=" + loginData.password)
+    const dataString = JSON.stringify(loginData);
+
+    makeRequest('POST', 'http://localhost:8080/MovieWatchlist/api/account/login', dataString)
         .then((value) => {
-            const dataString2 = JSON.stringify(value);
-            sessionStorage.setItem('alltheDetails', dataString2)
-            sessionStorage.setItem('username', loginData.username)
-            window.location = "userDetails.html";
+
+
+            const dataString2 = (JSON.parse(value));
+
+            sessionStorage.setItem('dataStored', dataString2);
+            sessionStorage.setItem('username', dataString2.accountId)
+            window.location = "main.html";
             console.log(value);
         }).catch((error) => {
             console.warn(error);

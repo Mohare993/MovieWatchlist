@@ -9,23 +9,26 @@ public class  MovieListService {
 	@Inject
 	private MovieListRepository repo;
 
-	public String CreateList(Long userId,String listsTodo) {
+	public String CreateList(Long userId,String lists) {
 
-		return this.repo.CreateList(userId,listsTodo);
+		return this.repo.CreateList(userId,lists);
 	}
 
 	public String getAllLists() {
 		return this.repo.getAllLists();
 	}
 
-	public String updateList(long listId, String listsTodo) {
+	public String updateList(Long listId, String lists) {
 
-		return this.repo.updateList(listId, listsTodo);
+		return this.repo.updateList(listId, lists);
 
 	}
 
-	public String deleteList(long listId) {
+	public String deleteList(Long listId) {
 		return this.repo.deleteList(listId);
 	}
-
+	
+	public String getAllListsForAcc(Long userId) {
+		return this.repo.getAllListsForAcc(userId);
+	}
 }
