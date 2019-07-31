@@ -2,8 +2,7 @@
     --input-padding-x: 1.5rem;
     --input-padding-y: 0.75rem;
     font-family: 'Roboto Mono', monospace;
-    padding-top: 85px;
-    padding-left: 30;
+   
   }
   
   .login,
@@ -20,14 +19,29 @@
     
   }
 
+  .modal {
+    color: black;
+    font-family: 'Roboto Mono', monospace;
+    
+
+  }
+
+  .card {
+      background-color: rgba(128, 0, 0, 0.65);
+      color: white;
+      font-family: 'Roboto Mono', monospace;
+      
+      
+  }
+
   body {
     background-image: url('https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80');
     background-size: cover;
-    background-position: center;
-    padding-top: 85px;
-    padding-left: 30;
+    background-position: center;    
     color: white;
     font-family: 'Roboto Mono', monospace;
+    padding: 55px;
+  
 }
 
   .testy {
@@ -49,6 +63,20 @@
 
   .btn1 {
     background-color: #800000;
+    font-size: 0.9rem;
+    letter-spacing: 0.05rem;
+    padding: 0.75rem 1rem;
+    border-radius: 2rem;
+
+  }
+
+  .btn2 {
+    background-color: #800000;
+    font-size: 0.9rem;
+    letter-spacing: 0.05rem;
+    padding: 0.75rem 1rem;
+    border-radius: 2rem;
+    color: white;
 
   }
   
