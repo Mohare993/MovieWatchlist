@@ -1,9 +1,6 @@
 const BASE_URL = "http://www.omdbapi.com/?apikey=a172e1b0";
+const listId = sessionStorage.getItem('listID');
 
-
-// const searchResults = document.getElementById("movieResult");
-// const newLine = document.createElement('p');
-// let x = "";
 
 
 function searchSubmit(form) {
@@ -16,17 +13,11 @@ function searchSubmit(form) {
         const data = JSON.parse(xhr.responseText);
         console.log('Search  request loaded. Data:', data)
         displayResults(data);
-        // populatePage(data);
-        // displayResult(data);
 
     };
 
     xhr.open("GET", BASE_URL + "&s=" + form.searchInput.value);
     xhr.send();
-
-
-
-
 
 }
 
@@ -40,98 +31,125 @@ function handleMovieClicked(movie) {
 
 function displayResults(data) {
 
+    clearSearchResults();
+
     
-    const moviesDiv = document.getElementById("moivesfill");
-    moviesDiv.innerHTML = "";
+    const moviesDiv = document.getElementById("searchResults");
+   
+    
    
 
     for (let movieData of data.Search) {
 
+        console.log(movieData);
+
         const mDiv = document.createElement("div");
+        mDiv.className = 'dropdown-item';
         mDiv.setAttribute("name", "movie");
-        mDiv.className = "card m-4 p-2";
-        mDiv.addEventListener("click", () => handleMovieClicked(movieData));
+        mDiv.addEventListener("click", () => handleMovieClicked(movieData));     
 
-        var myImage = new Image(100, 150);
-        myImage.src = movieData.Poster;
-        
-
-
-
-        let title = document.createElement("h4");
+        let title = document.createElement("h3");
         title.innerText = movieData.Title;
 
-        let year = document.createElement("h6");
-        year.innerText = movieData.Year;
-
-        mDiv.append(myImage);
-
-
         mDiv.append(title);
-        mDiv.append(year);
-
         moviesDiv.append(mDiv);
 
-
+     
+       
     }
+
+    moviesDiv.style.display = "block";
 }
 
 
 
+function getmovies() {
+
+ 
+    makeRequest('GET', 'http://localhost:8080/MovieWatchlist/api/movie/get/' + listId)
+        .then((value) => {
+
+            var $table = $('#table');
+            var mydata = JSON.parse(value); 
+
+            $(function () {
+                $('#table').bootstrapTable({
+                    data: mydata
+                });
+            });
 
 
-// function populatePage({Search, totalResults, ...everythingElse }) {
-//     // Container refs
-//     const searchResults = document.getElementById("movieResult");
-//     const movies = document.getElementById("totalResult");
+            console.log(value);
+        }).catch((error) => {
+            console.warn(error);
+        });
 
+    return false;
+}
 
-//     // Generate meovies
-//     for (let movie of Search) {
-//        searchResults.append(getMovies(movie));
-//     }
-// }
+function checkForGames() {
+    //check for games matching text
+    clearSearchResults();
+    const searchStr = document.getElementById('searchText').value.trim();
+    if(searchStr === "") {
+        hideResults();
+        return;
+    }
 
+    const resultsDiv = document.getElementById('searchResults');
+    makeRequest("GET", BASE_URL + "&s=" + searchStr)
+        .then(value => {
+            if(value && value.length > 0) {
+               
+                for(const key in value){
+                    createGame(value[key], resultsDiv);
+                }
+                //display results
+                document.getElementById("searchResults").style.display = "block";
+            } else {
+                console.log("hide");
+                hideResults();
+            }
+        });
+}
 
-// function getMovies(movie) {
-//     const wrapper = document.createElement('div');
-//     wrapper.className = 'card m-3';
+function createGame(game, parentDiv) {
+    const div = document.createElement('div');
+    div.className = 'dropdown-item';
+    div.addEventListener('click', (e) => {
+        sessionStorage.setItem('gameId', game.id);
+        window.location = "game.html";
+    });
 
-//     const title = document.createElement('div');
-//     title.className = 'card-body';
-//     title.innerText = movie.Title;
-//     wrapper.append(title);
+    const h = document.createElement('h3');
+    h.innerText = game.Title;
+    const p = document.createElement('p');
+    p.innerText = game.Year;
+    div.append(h);
+    div.append(p);
+    parentDiv.append(div);
+}
 
-//     for(let key in movie) {
-//         wrapper.append(getKeyValueParagraph(key, movie[key]));
-//     }
+function clearSearchResults() {
+    const resultsDiv = document.getElementById('searchResults');
+    while(resultsDiv.lastChild) {
+        resultsDiv.removeChild(resultsDiv.lastChild);
+    }
+}
 
-//     return wrapper;
-// }
+function hideResults() {
+    const resultDiv = document.getElementById("searchResults");
+    if(resultDiv.style.display === "block") {
+       resultDiv.style.display = "none";
+    }
+}
 
-// function getKeyValueParagraph(key, value) {
-//     const el = document.createElement('p');
-//     el.innerHTML = '<b>' + key + '</b>: ' + value;
-//     return el;
-// }
+function makeDivElement(tag, text, className, parentDiv) {
+    const e = document.createElement(tag);
 
-
-
-
-// function displayResult(data) {
-
-
-//     for (let i in data.Search) {
-
-//             x += "<p>" + data.Search[i].Title + "</p>";
-//             x += "<p>" + data.Search[i].Year + "</p>";
-//             x += "<p>" + data.Search[i].imdbID + "</p>";
-//             x += "<p>" + data.Search[i].Type + "</p>";
-
-
-//      }
-
-
-//     document.getElementById("movieResult").innerHTML = x;
-
-// }
+    if(text) { e.innerText = text; }
+    if(className) { e.className = className; }
+    if(parentDiv) { parentDiv.append(e); }
+    
+    return e;
+}

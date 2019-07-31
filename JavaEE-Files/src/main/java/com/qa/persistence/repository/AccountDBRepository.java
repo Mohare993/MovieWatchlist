@@ -12,6 +12,7 @@ import javax.transaction.Transactional.TxType;
 
 import com.qa.exceptions.AccountNotFoundException;
 import com.qa.persistence.domain.Account;
+import com.qa.persistence.domain.MovieList;
 import com.qa.util.JSONUtil;
 
 @Default
@@ -92,6 +93,12 @@ public class AccountDBRepository implements AccountRepository {
 			return false;
 		}
 
+	}
+	
+	@Override
+	public String getDetailsForAcc(Long accountId) throws AccountNotFoundException {
+		TypedQuery<Account> query = this.manager.createQuery("SELECT u FROM Account u WHERE accountId='" + accountId + "'",  Account.class);
+		return this.json.getJSONForObject(query.getSingleResult());
 	}
 
 }

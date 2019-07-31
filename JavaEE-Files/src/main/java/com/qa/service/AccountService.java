@@ -14,5 +14,7 @@ public interface AccountService {
 	String updateAccount(Long accountId, String account) throws AccountNotFoundException;
 	
 	String login(String account);
+	
+	String getDetailsForAcc(Long accountId) throws AccountNotFoundException;
 
 }

@@ -10,9 +10,16 @@ function displayLists1(value) {
 
     for (let list of value) {
         const oDiv = document.createElement('div');
+        const testDiv =  document.createElement('div');
+        createElement('h4',  "Listname : ", 'card-header', oDiv);
+        
+
+    
+      
 
         oDiv.className = 'card m-4 p-2';
-        oDiv.addEventListener('click', () => handleListClicked(list));
+        // oDiv.addEventListener('click', () => handleListClicked(list));
+
 
         let lName = document.createElement('h4');
         lName.innerText = list.listName;
@@ -21,13 +28,17 @@ function displayLists1(value) {
 
         listsDiv.append(oDiv);
 
+        createButton('Modify', (e) => handleListClicked(list), oDiv);
+        createButton('Delete', (e) => console.log('delete btn click'), oDiv);
+
     }
+   
 }
 
 function handleListClicked(list) {
     console.log('List CLICKED!', list.listId);
     sessionStorage.setItem('listID', list.listId);
-
+    window.location = "movietable.html";
     return false;
 }
 
@@ -55,6 +66,24 @@ function createList(form) {
         });
 
     return false;
+}
+
+function createElement(tag, text, className, parent){
+    const e = document.createElement(tag);
+    e.innerText = text;
+    e.className = className;
+    if(parent){
+        parent.append(e);
+    }
+    return e;
+}
+
+function createButton(text, func, parent){
+    const btn = document.createElement('input');
+    btn.setAttribute('value', text);
+    btn.setAttribute('type', 'button');
+    btn.addEventListener('click', func);
+    parent.append(btn);
 }
 
 displayLists();

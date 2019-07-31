@@ -41,6 +41,11 @@ public class AccountServiceImpl implements AccountService {
 	public String login(String account) {
 	return this.repo.login(account);
 	}
+	
+	@Override
+	public String getDetailsForAcc(Long accountId) throws AccountNotFoundException {
+		return this.repo.getDetailsForAcc(accountId);
+	}
 
 
 
