@@ -44,4 +44,10 @@ public class AccountController {
 	public String login(String account) {
 		return this.service.login(account);
 	}
+	
+	@GET
+	@Path("/get/{id}")
+	public String getDetailsForAcc(@PathParam("id") Long accountId) {
+		return this.service.getDetailsForAcc(accountId);
+	}
 }

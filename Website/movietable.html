@@ -9,6 +9,8 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
     crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.15.3/dist/bootstrap-table.min.css">
+<script src="https://unpkg.com/bootstrap-table@1.15.3/dist/bootstrap-table.min.js"></script>
 <!------ Include the above in your HEAD tag ---------->
 
 <head>
@@ -19,6 +21,7 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
+    <link rel="icon" href="Favicon.png">
     <link href="https://fonts.googleapis.com/css?family=Permanent+Marker&display=swap" rel="stylesheet">
 
     <!-- Bootstrap & CSS -->
@@ -69,55 +72,46 @@
   
   <!--/.Navbar -->
 
-  <div class="px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-    <h1 class="display-6">Your Lists</h1>
-    <p class="lead">Quickly build an effective pricing table for your potential customers with this Bootstrap example. It’s built with default Bootstrap components and utilities with little customization.</p>
-   <!-- Button trigger modal -->
-<button type="button" class="btn1 btn-lg btn-danger" data-toggle="modal" data-target="#ModalCenter">
-    Create List
-  </button>
 
 
-  <div id="lists" class="card-columns"></div>
-</div>
+  <button onclick="getmovies()">AHHHHH</button>
 
-   
-  <!-- Modal -->
-<div class="modal fade" id="ModalCenter" tabindex="-1" role="dialog" aria-labelledby="ModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalCenterTitle">Enter a list name:</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
+
+                
+  <table
+  id="table">
+  <thead>
+    <tr>
+      <th data-field="id" data-sortable="true">Id</th>
+      <th data-field="imdbID" data-sortable="true">IMBD Id</th>
+      <th data-field="Title" data-sortable="true">Title</th>
+      <th data-field="Year" data-sortable="true">Year</th>
+      <th data-field="Genre" data-sortable="true">Genre</th>
+      <th data-field="Plot" data-sortable="true">Plot</th>
+      <th data-field="imdbRating" data-sortable="true">IMBD Rating</th>
+      <th data-field="Poster" data-sortable="true">Poster</th>
+    </tr>
+  </thead>
+</table>
+
+ <!-- search -->
+  <form id="searchForm" class="form-inline my-2 my-lg-0 justify-content-center container">
+    <div class="dropdown">
+        <input class="form-control mr-sm-2" type="text" placeholder="Search" id="searchInput" onkeyup="searchSubmit(searchForm)"
+        aria-label="Search">
+        <div id="searchResults" class="dropdown-menu">
+           <!-- api call results here -->
         </div>
-        <div class="modal-body">
-                <form onsubmit="return createList(this)">
-            <div class="form-label-group">
-                <input type="listName" id="listName" class="form-control"
-                    placeholder="listName" required autofocus>
-                <label for="listName">Listname</label>
-                <br>
-                <button
-                class="btn2 btn-danger btn-block text-uppercase font-weight-bold"
-                type="submit">Create List</button>
-                </form>
-            </div>
-        </div>
-      </div>
     </div>
-  </div>
-</div>
-  
+     
  
-
+</form>
 
 
 </body>
 
-<script src="js/request.js"></script>
-<script src="js/list.js"></script>
-</html>
 
-        
+<script src="js/request.js"></script>
+<script src="js/omdb.js"></script>
+
+</html>

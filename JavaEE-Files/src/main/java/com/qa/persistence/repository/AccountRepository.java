@@ -19,7 +19,9 @@ public interface AccountRepository {
 	
 	String login(String account);
 	
-	boolean checkUsername(String account); 
+	boolean checkUsername(String account);
+
+	String getDetailsForAcc(Long accountId) throws AccountNotFoundException;
 
 
 }
