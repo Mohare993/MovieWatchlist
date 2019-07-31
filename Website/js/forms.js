@@ -30,11 +30,14 @@ function handleSubmit(form) {
     }
 
     const dataString = JSON.stringify(userData);
-    sessionStorage.setItem('alltheDetails', dataString);
+   
 
     makeRequest('POST', 'http://localhost:8080/MovieWatchlist/api/account/createAccount', dataString)
         .then((value) => {
-            window.location = "main.html";
+
+            const dataString2 = (JSON.parse(value));
+            sessionStorage.setItem('accId', dataString2.accountId)
+            window.location = "main%20copy.html";
             console.log(value);
         }).catch((error) => {
             console.warn(error);
@@ -60,13 +63,9 @@ function handleLogin(form) {
 
     makeRequest('POST', 'http://localhost:8080/MovieWatchlist/api/account/login', dataString)
         .then((value) => {
-
-
             const dataString2 = (JSON.parse(value));
-
-            sessionStorage.setItem('dataStored', dataString2);
-            sessionStorage.setItem('username', dataString2.accountId)
-            window.location = "main.html";
+            sessionStorage.setItem('accId', dataString2.accountId)
+            window.location = "main%20copy.html";
             console.log(value);
         }).catch((error) => {
             console.warn(error);
@@ -99,7 +98,7 @@ function handleUpdateSubmit(form) {
     }
 
     const dataString = JSON.stringify(userData);
-    sessionStorage.setItem('alltheDetails', dataString);
+    
 
     makeRequest('POST', 'https://us-central1-qac-sandbox.cloudfunctions.net/setUser', dataString)
         .then((value) => {

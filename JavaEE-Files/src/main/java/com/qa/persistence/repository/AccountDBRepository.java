@@ -35,7 +35,7 @@ public class AccountDBRepository implements AccountRepository {
 	public String createAccount(String account) {
 		Account toCreate = this.json.getObjectForJSON(account, Account.class);
 		this.manager.persist(toCreate);
-		return "SUCCESS - Account created.";
+		return this.json.getJSONForObject(toCreate);
 	}
 
 	@Override
