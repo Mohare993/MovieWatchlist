@@ -3,7 +3,7 @@ const moviesDiv = document.getElementById("moivesfill");
 
 function getmovies() {
 
-    makeRequest('GET', local + 'MovieWatchlist/api/movie/get/' + listId)
+    makeRequest('GET', cloud + 'MovieWatchlist/api/movie/get/' + listId)
     .then((value) => {
         var data = JSON.parse(value)
         displayMovies(data);
@@ -64,7 +64,7 @@ function deleteMovie(movie){
     sessionStorage.setItem('movieID', movie.movieId);
     const movieID = sessionStorage.getItem('movieID');
 
-    makeRequest('DELETE', local + 'MovieWatchlist/api/lists/delete/' + movieID)
+    makeRequest('DELETE', cloud + 'MovieWatchlist/api/lists/delete/' + movieID)
     .then((value) => {
         alert("Movie Deleted");
         window.location = "movietable.html";

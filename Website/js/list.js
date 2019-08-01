@@ -2,7 +2,7 @@ const listsDiv = document.getElementById('lists');
 const accId = sessionStorage.getItem('accId');
 function displayLists() {
 
-    makeRequest('GET', local + 'MovieWatchlist/api/lists/get/' + accId)
+    makeRequest('GET', cloud + 'MovieWatchlist/api/lists/get/' + accId)
         .then(value => displayLists1(JSON.parse(value)));
 }
 
@@ -53,7 +53,7 @@ function createList(form) {
 
 
 
-    makeRequest('POST', local + 'MovieWatchlist/api/lists/create/' + accId + "/", dataString)
+    makeRequest('POST', cloud + 'MovieWatchlist/api/lists/create/' + accId + "/", dataString)
         .then((value) => {
             window.location = "main.html";
         }).catch((error) => {
@@ -87,7 +87,7 @@ function deleteList(list){
     const listID = sessionStorage.getItem('listID');
 
 
-    makeRequest('DELETE', local + 'MovieWatchlist/api/lists/delete/' + listID)
+    makeRequest('DELETE', cloud + 'MovieWatchlist/api/lists/delete/' + listID)
     .then((value) => {
         alert("List Deleted");
         window.location = "main.html";

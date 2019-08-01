@@ -33,7 +33,7 @@ function handleSubmit(form) {
     const dataString = JSON.stringify(userData);
    
 
-    makeRequest('POST', local + 'MovieWatchlist/api/account/createAccount', dataString)
+    makeRequest('POST', cloud + 'MovieWatchlist/api/account/createAccount', dataString)
         .then((value) => {
 
             const dataString2 = (JSON.parse(value));
@@ -68,7 +68,7 @@ function handleLogin(form) {
 
     const dataString = JSON.stringify(loginData);
 
-    makeRequest('POST', local + 'MovieWatchlist/api/account/login', dataString)
+    makeRequest('POST', cloud + 'MovieWatchlist/api/account/login', dataString)
         .then((value) => {
             const dataString2 = (JSON.parse(value));
             sessionStorage.setItem('accId', dataString2.accountId)

@@ -36,7 +36,7 @@ function handleMovieClicked(movie) {
 
 function handleMovieClicked1(movie) {
 
-    makeRequest('POST', local + 'MovieWatchlist/api/movie/createMovie/' + listId, movie)
+    makeRequest('POST', cloud + 'MovieWatchlist/api/movie/createMovie/' + listId, movie)
         .then((value) => {
             window.location = "movietable.html";
         }).catch((error) => {
@@ -83,7 +83,7 @@ function displayResults(data) {
 
 function getmovies() {
 
-    makeRequest('GET', local + 'MovieWatchlist/api/movie/get/' + listId)
+    makeRequest('GET', cloud + 'MovieWatchlist/api/movie/get/' + listId)
     .then((value) => {
         var data = JSON.parse(value)
         displayMovies(data);
@@ -149,7 +149,7 @@ function deleteMovie(movie) {
     sessionStorage.setItem('movieID', movie.id);
     const movieID = sessionStorage.getItem('movieID');
 
-    makeRequest('DELETE', local + 'MovieWatchlist/api/movie/delete/' + movieID)
+    makeRequest('DELETE', cloud + 'MovieWatchlist/api/movie/delete/' + movieID)
     .then((value) => {
         alert("Movie Deleted");
         window.location = "movietable.html";

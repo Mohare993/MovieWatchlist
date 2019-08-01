@@ -4,7 +4,7 @@ const accId = sessionStorage.getItem('accId');
 function deleteAcc() {
 
 
-    makeRequest('DELETE', local + 'MovieWatchlist/api/account/delete/' + accId)
+    makeRequest('DELETE', cloud + 'MovieWatchlist/api/account/delete/' + accId)
         .then((value) => {
             sessionStorage.clear();
             alert("Account Deleted");
@@ -32,7 +32,7 @@ function handleUpdateSubmit(form) {
     const dataString = JSON.stringify(userData);
    
 
-    makeRequest('POST', local + 'MovieWatchlist/api/account/update/' + accId, dataString)
+    makeRequest('POST', cloud + 'MovieWatchlist/api/account/update/' + accId, dataString)
         .then((value) => {
             alert("Account Updated");
             alertDiv.innerHTML = "";
@@ -58,7 +58,7 @@ function load_data() {
     const inUserEmail = document.getElementById("email");  
     const inUserPass = document.getElementById("password");    
     
-    makeRequest('GET', local + 'MovieWatchlist/api/account/get/' + accId)
+    makeRequest('GET', cloud + 'MovieWatchlist/api/account/get/' + accId)
     .then((value) => {
         
     const ddd = JSON.parse(value);
