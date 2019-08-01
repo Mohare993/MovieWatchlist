@@ -60,7 +60,7 @@ function createList(form) {
 
     makeRequest('POST', 'http://localhost:8080/MovieWatchlist/api/lists/create/' + accId + "/", dataString)
         .then((value) => {
-            window.location = "main%20copy.html";
+            window.location = "main.html";
         }).catch((error) => {
             console.warn(error);
         });

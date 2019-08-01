@@ -37,7 +37,7 @@ function handleSubmit(form) {
 
             const dataString2 = (JSON.parse(value));
             sessionStorage.setItem('accId', dataString2.accountId)
-            window.location = "main%20copy.html";
+            window.location = "main.html";
             console.log(value);
         }).catch((error) => {
             console.warn(error);
@@ -65,7 +65,7 @@ function handleLogin(form) {
         .then((value) => {
             const dataString2 = (JSON.parse(value));
             sessionStorage.setItem('accId', dataString2.accountId)
-            window.location = "main%20copy.html";
+            window.location = "main.html";
             console.log(value);
         }).catch((error) => {
             console.warn(error);
