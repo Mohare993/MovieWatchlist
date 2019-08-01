@@ -6,16 +6,19 @@
   }
 
   #searchResults {
-    width: 300px;
-    margin-top: 0;
+    width: 300px;margin-top: 0;
     margin-bottom: 0;
     padding-top: 0;
     padding-bottom: 0;
     z-index: -1;
+    white-space: normal;
+    background: white;
+    
 }
 
 .dropdown-item {
     border-top: 1px solid #CCCCCC;
+    white-space: normal;
 }
   
   .login,
