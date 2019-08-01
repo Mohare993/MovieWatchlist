@@ -11,9 +11,7 @@
     crossorigin="anonymous"></script>
 <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.15.3/dist/bootstrap-table.min.css">
 <script src="https://unpkg.com/bootstrap-table@1.15.3/dist/bootstrap-table.min.js"></script>
-<script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
-<script type="text/javascript" src="js/bootstrap.js"></script>
-<script type="text/javascript" src="js/bootstrap-table.js"></script>
+<script src="https://kit.fontawesome.com/a9086d8795.js"></script>
 <!------ Include the above in your HEAD tag ---------->
 
 <head>
@@ -31,7 +29,6 @@
     <!-- CSS -->
     <link href="css/main.css" rel="stylesheet">
     <link href="css/navbar.css" rel="stylesheet">
-    <link href="css/fresh-bootstrap-table.css" rel="stylesheet" />
 
 
     <title>Movie Watchlist</title>
@@ -39,90 +36,62 @@
 
 <body>
 
-    <!--Navbar -->
+  <!--Navbar -->
 
 
-    <nav class="navbar navbar-expand-lg navbar-dark navbar-fixed-top">
-        <div class="container">
-            <a class="navbar-brand" href="main.html"> <img src="https://i.ibb.co/FWN4rxh/logo.png" width="40"
-                    height="30" class="d-inline-block align-top" alt="">
-                Movie Watchlist</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+  <nav class="navbar navbar-expand-lg navbar-dark navbar-fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="main.html"> <img src="https://i.ibb.co/FWN4rxh/logo.png" width="40" height="30"
+          class="d-inline-block align-top" alt="">
+        Movie Watchlist</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="main.html">Lists</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-user"></i>&nbsp; User
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="account.html">Edit User Details</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="splash.html">Logout</a>
-                        </div>
-                    </li>
-                </ul>
-
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="main.html">Lists</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              <i class="fas fa-user"></i>&nbsp; User
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <button class="btn1 btn-lg btn-danger btn-block btn-login text-uppercase font-weight-bold mb-2"
+                type="submit" onclick="userdets()">User Details</button>
+              <div class="dropdown-divider"></div>
+              <button class="btn1 btn-lg btn-danger btn-block btn-login text-uppercase font-weight-bold mb-2"
+                type="submit" onclick="logout()">Logout</button>
             </div>
-        </div>
-    </nav>
+          </li>
+        </ul>
 
-
-    <!--/.Navbar -->
-
-
-
-    <button onclick="getmovies()">AHHHHH</button>
-
-
-    <div class="fresh-table toolbar-color-red">
-        <!--    Available colors for the full background: full-color-blue, full-color-azure, full-color-green, full-color-red, full-color-orange
-                Available colors only for the toolbar: toolbar-color-blue, toolbar-color-azure, toolbar-color-green, toolbar-color-red, toolbar-color-orange
-        -->
-    
-            <div class="toolbar">
-                <button id="alertBtn" class="btn btn-default">Alert</button>
-            </div>
-    
-            
-    <table id="table"class="table">
-        <thead>
-            <tr>
-                <th data-field="id" data-sortable="true">Id</th>
-                <th data-field="imdbID" data-sortable="true">IMBD Id</th>
-                <th data-field="Title" data-sortable="true">Title</th>
-                <th data-field="Year" data-sortable="true">Year</th>
-                <th data-field="Genre" data-sortable="true">Genre</th>
-                <th data-field="Plot" data-sortable="true">Plot</th>
-                <th data-field="imdbRating" data-sortable="true">IMBD Rating</th>
-                <th data-field="Poster" data-sortable="true">Poster</th>
-                <th data-field="actions" data-formatter="operateFormatter" data-events="operateEvents">Actions</th>
-            </tr>
-        </thead>
-    </table>
+      </div>
     </div>
+  </nav>
+
+  <!--/.Navbar -->
+
 
     <!-- search -->
     <form id="searchForm" class="form-inline my-2 my-lg-0 justify-content-center container">
+        <p>Search for a movie to add it to your list. &nbsp;&nbsp;&nbsp;</p>
         <div class="dropdown">
-            <input class="form-control mr-sm-2" type="text" placeholder="Search" id="searchInput"
-                onkeyup="searchSubmit(searchForm)" aria-label="Search">
+           <input class="form-control mr-sm-2" type="text" placeholder="Search" id="searchInput"
+                onkeyup="searchSubmit(searchForm)" aria-label="Search" autocomplete="off">
             <div id="searchResults">
             </div>
         </div>
     </form>
+    <div id="moivesfill" class="card-columns"></div>
 
 
 </body>
 
-
+<script src="js/conts.js"></script>
 <script src="js/request.js"></script>
 <script src="js/omdb.js"></script>
 

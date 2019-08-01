@@ -6,7 +6,10 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 
+import com.qa.exceptions.AccountNotFoundException;
 import com.qa.service.AccountService;
 
 @Path("/account")
@@ -23,8 +26,14 @@ public class AccountController {
 
 	@POST
 	@Path("/createAccount")
-	public String createAccount(String account) {
-		return this.service.createAccount(account);
+	public Response createAccount(String account) {
+		try {
+			return Response.ok(this.service.createAccount(account)).build();
+		} catch (AccountNotFoundException anfe) {
+			return Response.status(Status.CONFLICT).build();
+		} catch (Exception e) {
+			return Response.status(Status.BAD_REQUEST).build();
+		}
 	}
 
 	@DELETE
@@ -35,16 +44,22 @@ public class AccountController {
 
 	@POST
 	@Path("/update/{id}")
-	public String updateAccount(@PathParam("id") Long accountId, String account) {
-		return this.service.updateAccount(accountId, account);
+	public Response updateAccount(@PathParam("id") Long accountId, String account) {
+	try {
+		return Response.ok(this.service.updateAccount(accountId, account)).build();
+	} catch (AccountNotFoundException anfe) {
+		return Response.status(Status.CONFLICT).build();
+	} catch (Exception e) {
+		return Response.status(Status.BAD_REQUEST).build();
 	}
-	
+}
+
 	@POST
 	@Path("/login")
 	public String login(String account) {
 		return this.service.login(account);
 	}
-	
+
 	@GET
 	@Path("/get/{id}")
 	public String getDetailsForAcc(@PathParam("id") Long accountId) {

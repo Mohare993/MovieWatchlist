@@ -1,3 +1,5 @@
+const alertDiv = document.getElementById("alerts");
+
 function makeRequest(method, url, body) {
     return new Promise((resolve, reject) => {
         const xhr = new XMLHttpRequest();
@@ -14,7 +16,6 @@ function makeRequest(method, url, body) {
     });
 }
 
-// Example call
 
 const userData = {};
 
@@ -32,7 +33,7 @@ function handleSubmit(form) {
     const dataString = JSON.stringify(userData);
    
 
-    makeRequest('POST', 'http://localhost:8080/MovieWatchlist/api/account/createAccount', dataString)
+    makeRequest('POST', local + 'MovieWatchlist/api/account/createAccount', dataString)
         .then((value) => {
 
             const dataString2 = (JSON.parse(value));
@@ -41,6 +42,12 @@ function handleSubmit(form) {
             console.log(value);
         }).catch((error) => {
             console.warn(error);
+            const aDiv = document.createElement("div");
+            aDiv.className = "alert alert-danger alert-dismissible fade show";
+            aDiv.role = "alert";
+            aDiv.innerText = "Username is already taken! Please enter a different one.";
+            alertDiv.append(aDiv);
+            
         });
 
     return false;
@@ -61,7 +68,7 @@ function handleLogin(form) {
 
     const dataString = JSON.stringify(loginData);
 
-    makeRequest('POST', 'http://localhost:8080/MovieWatchlist/api/account/login', dataString)
+    makeRequest('POST', local + 'MovieWatchlist/api/account/login', dataString)
         .then((value) => {
             const dataString2 = (JSON.parse(value));
             sessionStorage.setItem('accId', dataString2.accountId)
@@ -69,43 +76,14 @@ function handleLogin(form) {
             console.log(value);
         }).catch((error) => {
             console.warn(error);
+            alertDiv.innerHTML = "";
+            const aDiv = document.createElement("div");
+            aDiv.className = "alert alert-danger alert-dismissible fade show";
+            aDiv.role = "alert";
+            aDiv.innerText = "Please enter a valid Username and Password.";
+            alertDiv.append(aDiv);
         });
 
     return false;
 }
 
-function deleteUser(username) {
-
-
-    makeRequest('DELETE', 'https://us-central1-qac-sandbox.cloudfunctions.net/deleteUser?username=' + username)
-        .then((value) => {
-            console.log(value, "DELETED");
-        }).catch((error) => {
-            console.warn(error);
-        });
-
-    return false;
-}
-
-function handleUpdateSubmit(form) {
-
-    console.log("submitted");
-
-    for (let element of form.elements) {
-        if (element.id) {
-            userData[element.id] = element.value;
-        }
-    }
-
-    const dataString = JSON.stringify(userData);
-    
-
-    makeRequest('POST', 'https://us-central1-qac-sandbox.cloudfunctions.net/setUser', dataString)
-        .then((value) => {
-            console.log(value);
-        }).catch((error) => {
-            console.warn(error);
-        });
-
-    return false;
-}

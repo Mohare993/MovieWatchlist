@@ -2,7 +2,7 @@ const listsDiv = document.getElementById('lists');
 const accId = sessionStorage.getItem('accId');
 function displayLists() {
 
-    makeRequest('GET', 'http://localhost:8080/MovieWatchlist/api/lists/get/' + accId)
+    makeRequest('GET', local + 'MovieWatchlist/api/lists/get/' + accId)
         .then(value => displayLists1(JSON.parse(value)));
 }
 
@@ -10,15 +10,10 @@ function displayLists1(value) {
 
     for (let list of value) {
         const oDiv = document.createElement('div');
-        const testDiv =  document.createElement('div');
+ 
         createElement('h4',  "Listname : ", 'card-header', oDiv);
         
-
-    
-      
-
         oDiv.className = 'card m-4 p-2';
-        // oDiv.addEventListener('click', () => handleListClicked(list));
 
 
         let lName = document.createElement('h4');
@@ -28,8 +23,8 @@ function displayLists1(value) {
 
         listsDiv.append(oDiv);
 
-        createButton('Modify', (e) => handleListClicked(list), oDiv);
-        createButton('Delete', (e) => console.log('delete btn click'), oDiv);
+        createButton('Show List', (e) => handleListClicked(list), oDiv);
+        createButton('Delete', (e) => deleteList(list), oDiv);
 
     }
    
@@ -58,7 +53,7 @@ function createList(form) {
 
 
 
-    makeRequest('POST', 'http://localhost:8080/MovieWatchlist/api/lists/create/' + accId + "/", dataString)
+    makeRequest('POST', local + 'MovieWatchlist/api/lists/create/' + accId + "/", dataString)
         .then((value) => {
             window.location = "main.html";
         }).catch((error) => {
@@ -82,8 +77,26 @@ function createButton(text, func, parent){
     const btn = document.createElement('input');
     btn.setAttribute('value', text);
     btn.setAttribute('type', 'button');
+    btn.setAttribute('class', 'btn1 btn-danger');
     btn.addEventListener('click', func);
     parent.append(btn);
+}
+
+function deleteList(list){
+    sessionStorage.setItem('listID', list.listId);
+    const listID = sessionStorage.getItem('listID');
+
+
+    makeRequest('DELETE', local + 'MovieWatchlist/api/lists/delete/' + listID)
+    .then((value) => {
+        alert("List Deleted");
+        window.location = "main.html";
+        console.log(value, "DELETED");
+    }).catch((error) => {
+        console.warn(error);
+    });
+
+return false;
 }
 
 displayLists();

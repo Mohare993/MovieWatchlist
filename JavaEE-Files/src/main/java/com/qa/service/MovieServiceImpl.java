@@ -21,8 +21,8 @@ public class MovieServiceImpl implements MovieService {
 	}
 
 	@Override
-	public String deleteMovie(Long listId) throws AccountNotFoundException {
-		return this.repo.deleteMovie(listId);
+	public String deleteMovie(Long movieId) throws AccountNotFoundException {
+		return this.repo.deleteMovie(movieId);
 	}
 	
 	@Override
