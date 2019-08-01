@@ -13,3 +13,12 @@ function makeRequest(method, url, body) {
         xhr.send(body || null);
     });
 }
+
+function logout(){
+    sessionStorage.clear();
+    window.location = "splash.html";
+}
+
+function userdets(){
+    window.location = "account.html";
+}

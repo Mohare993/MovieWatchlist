@@ -8,7 +8,7 @@ public interface MovieService {
 
 	String createMovie(Long listId, String movie);
 
-	String deleteMovie(Long listId) throws AccountNotFoundException;
+	String deleteMovie(Long movieId) throws AccountNotFoundException;
 	
 	String getAllMoviesForList(Long listId);
 

@@ -22,8 +22,7 @@ public class AccountServiceImpl implements AccountService {
 			return this.repo.createAccount(account);
 
 		} else {
-
-			return "{\"Success\":\"False\"}";
+			throw new AccountNotFoundException();
 		}
 	}
 	
@@ -34,8 +33,11 @@ public class AccountServiceImpl implements AccountService {
 
 	@Override
 	public String updateAccount(Long accountId, String account) throws AccountNotFoundException {
+		if (this.repo.checkUsername(account)== true) {
 		return this.repo.updateAccount(accountId, account);
-	}
+	}else {
+		throw new AccountNotFoundException();
+	}}
 	
 	@Override
 	public String login(String account) {

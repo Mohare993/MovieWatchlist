@@ -7,6 +7,7 @@ import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 import javax.transaction.Transactional.TxType;
 
+import com.qa.exceptions.AccountNotFoundException;
 import com.qa.persistence.domain.Account;
 import com.qa.persistence.domain.MovieList;
 import com.qa.util.JSONUtil;
@@ -53,9 +54,10 @@ public class MovieListRepository {
 	}
 	
 	@Transactional(value = TxType.REQUIRED)
-	public String deleteList(Long listId) {
+	public String deleteList(Long listId) throws AccountNotFoundException {
 		this.manager.remove(this.manager.find(MovieList.class, listId));
 		return "Deleted List";
 	}
+
 
 }

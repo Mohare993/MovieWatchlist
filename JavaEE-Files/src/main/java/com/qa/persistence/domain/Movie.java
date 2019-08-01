@@ -11,7 +11,7 @@ public class Movie {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	private Long id;
 	private String imdbID;
 	private String Title;
 	private Integer Year;
@@ -23,7 +23,7 @@ public class Movie {
 	@ManyToOne
 	private MovieList MovieList;
 
-	public Movie(Integer id, String imdbId, String title, Integer year, String genre, String plot, Float imdbRating,
+	public Movie(Long id, String imdbId, String title, Integer year, String genre, String plot, Float imdbRating,
 			String poster,Long listId) {
 		super();
 		this.id = id;
@@ -48,11 +48,11 @@ public class Movie {
 
 	}
 
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

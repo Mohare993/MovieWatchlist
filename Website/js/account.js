@@ -1,10 +1,10 @@
-
+const alertDiv = document.getElementById("alerts");
 const accId = sessionStorage.getItem('accId');
 
 function deleteAcc() {
 
 
-    makeRequest('DELETE', 'http://localhost:8080/MovieWatchlist/api/account/delete/' + accId)
+    makeRequest('DELETE', local + 'MovieWatchlist/api/account/delete/' + accId)
         .then((value) => {
             sessionStorage.clear();
             alert("Account Deleted");
@@ -32,11 +32,19 @@ function handleUpdateSubmit(form) {
     const dataString = JSON.stringify(userData);
    
 
-    makeRequest('POST', 'http://localhost:8080/MovieWatchlist/api/account/update/' + accId, dataString)
+    makeRequest('POST', local + 'MovieWatchlist/api/account/update/' + accId, dataString)
         .then((value) => {
+            alert("Account Updated");
+            alertDiv.innerHTML = "";
             console.log(value);
         }).catch((error) => {
             console.warn(error);
+            alertDiv.innerHTML = "";
+            const aDiv = document.createElement("div");
+            aDiv.className = "alert alert-danger alert-dismissible fade show";
+            aDiv.role = "alert";
+            aDiv.innerText = "Username is already taken! Please enter a different one.";
+            alertDiv.append(aDiv);
         });
 
     return false;
@@ -50,7 +58,7 @@ function load_data() {
     const inUserEmail = document.getElementById("email");  
     const inUserPass = document.getElementById("password");    
     
-    makeRequest('GET', 'http://localhost:8080/MovieWatchlist/api/account/get/' + accId)
+    makeRequest('GET', local + 'MovieWatchlist/api/account/get/' + accId)
     .then((value) => {
         
     const ddd = JSON.parse(value);

@@ -2,6 +2,7 @@ package com.qa.service;
 
 import javax.inject.Inject;
 
+import com.qa.exceptions.AccountNotFoundException;
 import com.qa.persistence.repository.MovieListRepository;
 
 public class  MovieListService {
@@ -24,7 +25,7 @@ public class  MovieListService {
 
 	}
 
-	public String deleteList(Long listId) {
+	public String deleteList(Long listId) throws AccountNotFoundException {
 		return this.repo.deleteList(listId);
 	}
 	

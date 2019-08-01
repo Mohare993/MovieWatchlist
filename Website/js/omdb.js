@@ -1,5 +1,7 @@
 const BASE_URL = "http://www.omdbapi.com/?apikey=a172e1b0";
 const listId = sessionStorage.getItem('listID');
+const moviesDiv = document.getElementById("moivesfill");
+
 
 
 function searchSubmit(form) {
@@ -16,20 +18,36 @@ function searchSubmit(form) {
 
 function handleMovieClicked(movie) {
     console.log("movie clicked", movie);
-    const dataString = JSON.stringify(movie);
-    sessionStorage.setItem('movieData', dataString);
+    sessionStorage.setItem('movieData', movie.imdbID);
 
-    makeRequest('POST', 'http://localhost:8080/MovieWatchlist/api/movie/createMovie/' + listId, dataString)
+    const imbdID = sessionStorage.getItem('movieData');
+
+    makeRequest("GET", BASE_URL + "&i=" + imbdID)
         .then((value) => {
-            window.location = "movietable.html";
-            console.log(value);
+            handleMovieClicked1(value);
         }).catch((error) => {
             console.warn(error);
         });
 
+
+
+    return false;
+}
+
+function handleMovieClicked1(movie) {
+
+    makeRequest('POST', local + 'MovieWatchlist/api/movie/createMovie/' + listId, movie)
+        .then((value) => {
+            window.location = "movietable.html";
+        }).catch((error) => {
+            console.warn(error);
+        });
+
+
     return false;
 
 }
+
 
 
 function displayResults(data) {
@@ -65,91 +83,85 @@ function displayResults(data) {
 
 function getmovies() {
 
+    makeRequest('GET', local + 'MovieWatchlist/api/movie/get/' + listId)
+    .then((value) => {
+        var data = JSON.parse(value)
+        displayMovies(data);
+        console.log(data);
+    }).catch((error) => {
+        console.warn(error);
+    });
 
-    makeRequest('GET', 'http://localhost:8080/MovieWatchlist/api/movie/get/' + listId)
-        .then((value) => {
+return false;
 
-            var mydata = JSON.parse(value);
-
-            var $table = $('#table'),
-                $alertBtn = $('#alertBtn'),
-                full_screen = false;
-
-            $(function () {
-                $table.bootstrapTable({
-                    toolbar: ".toolbar",
-                    showRefresh: true,
-                    search: true,
-                    showToggle: true,
-                    showColumns: true,
-                    pagination: true,
-                    striped: true,
-                    sortable: true,
-                    pageSize: 8,
-                    pageList: [8, 10, 25, 50, 100],
-
-                    formatShowingRows: function (pageFrom, pageTo, totalRows) {
-                        //do nothing here, we don't want to show the text "showing x of y from..."
-                    },
-                    formatRecordsPerPage: function (pageNumber) {
-                        return pageNumber + " rows visible";
-                    },
-                    icons: {
-                        refresh: 'fa fa-refresh',
-                        toggle: 'fa fa-th-list',
-                        columns: 'fa fa-columns',
-                        detailOpen: 'fa fa-plus-circle',
-                        detailClose: 'fa fa-minus-circle'
-                    },
-                    data: mydata
-                });
-            });
-
-            $(function () {
-                $alertBtn.click(function () {
-                    alert("You pressed on Alert");
-                });
-            });
-
-
-            function operateFormatter(value, row, index) {
-                return [
-                    '<a rel="tooltip" title="Like" class="table-action like" href="javascript:void(0)" title="Like">',
-                    '<i class="fa fa-heart"></i>',
-                    '</a>',
-                    '<a rel="tooltip" title="Edit" class="table-action edit" href="javascript:void(0)" title="Edit">',
-                    '<i class="fa fa-edit"></i>',
-                    '</a>',
-                    '<a rel="tooltip" title="Remove" class="table-action remove" href="javascript:void(0)" title="Remove">',
-                    '<i class="fa fa-remove"></i>',
-                    '</a>'
-                ].join('');
-            }
-
-            window.operateEvents = {
-                'click .like': function (e, value, row, index) {
-                    alert('You click like icon, row: ' + JSON.stringify(row));
-                    console.log(value, row, index);
-                },
-                'click .edit': function (e, value, row, index) {
-                    console.log(value, row, index);
-                },
-                'click .remove': function (e, value, row, index) {
-                    alert('You click remove icon, row: ' + JSON.stringify(row));
-                    console.log(value, row, index);
-                }
-            };
-
-
-
-            console.log(value);
-        }).catch((error) => {
-            console.warn(error);
-        });
-
-    return false;
 }
 
+function displayMovies(data) {
+   
+    for (let movieData of data) {
+
+        const mDiv = document.createElement("div");
+        mDiv.className = "card m-4 p-2";
+        mDiv.style = "max-width: 540px;";
+
+        createElement('h5', movieData.Title , 'card-header', mDiv);
+       
+
+        const img = document.createElement('img');
+        img.className = "img-fluid rounded float-left";
+        img.setAttribute('src', movieData.Poster);
+
+        mDiv.append(img);
+
+        createElement('h5', "Year : " + movieData.Year, 'text', mDiv);
+        createElement('h6', "Genre : " + movieData.Genre , 'text', mDiv);
+        createElement('p', "Plot : " + movieData.Plot , 'text', mDiv);
+        createElement('h3', "imdbRating : " + movieData.imdbRating, 'text', mDiv);
+     
+        moviesDiv.append(mDiv);
+
+        createButton('Delete', (e) => deleteMovie(movieData), mDiv);
+
+    }
+}
+
+function createElement(tag, text, className, parent){
+    const e = document.createElement(tag);
+    e.innerText = text;
+    e.className = className;
+    if(parent){
+        parent.append(e);
+    }
+    return e;
+}
+
+function createButton(text, func, parent){
+    const btn = document.createElement('input');
+    btn.setAttribute('value', text);
+    btn.setAttribute('type', 'button');
+    btn.setAttribute('class', 'btn1 btn-danger');
+    btn.addEventListener('click', func);
+    parent.append(btn);
+}
+
+function deleteMovie(movie) {
+
+    sessionStorage.setItem('movieID', movie.id);
+    const movieID = sessionStorage.getItem('movieID');
+
+    makeRequest('DELETE', local + 'MovieWatchlist/api/movie/delete/' + movieID)
+    .then((value) => {
+        alert("Movie Deleted");
+        window.location = "movietable.html";
+        console.log(value, "DELETED");
+    }).catch((error) => {
+        console.warn(error);
+    });
+
+return false;
+}
+
+getmovies();
 
 
 function clearSearchResults() {

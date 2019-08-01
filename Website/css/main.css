@@ -13,8 +13,9 @@
     z-index: -1;
     white-space: normal;
     background: white;
-    
-}
+    }
+
+
 
 .dropdown-item {
     border-top: 1px solid #CCCCCC;
@@ -171,6 +172,12 @@
     }
   }
 
+  .img-fluid {
+    min-width: 150px;
+    max-width: 150px;
+    padding: 2px;
+    padding-right: 8px; 
+  }
   
   
   /* Fallback for Edge

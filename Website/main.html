@@ -6,6 +6,7 @@
   integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
   integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/a9086d8795.js"></script>
 <!------ Include the above in your HEAD tag ---------->
 
 <head>
@@ -28,10 +29,10 @@
 
 <body>
 
-  <!--Navbar -->
+   <!--Navbar -->
 
 
-  <nav class="navbar navbar-expand-lg navbar-dark navbar-fixed-top">
+   <nav class="navbar navbar-expand-lg navbar-dark navbar-fixed-top">
     <div class="container">
       <a class="navbar-brand" href="main.html"> <img src="https://i.ibb.co/FWN4rxh/logo.png" width="40" height="30"
           class="d-inline-block align-top" alt="">
@@ -52,9 +53,11 @@
               <i class="fas fa-user"></i>&nbsp; User
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="account.html">Edit User Details</a>
+              <button class="btn1 btn-lg btn-danger btn-block btn-login text-uppercase font-weight-bold mb-2"
+                type="submit" onclick="userdets()">User Details</button>
               <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="splash.html">Logout</a>
+              <button class="btn1 btn-lg btn-danger btn-block btn-login text-uppercase font-weight-bold mb-2"
+                type="submit" onclick="logout()">Logout</button>
             </div>
           </li>
         </ul>
@@ -65,10 +68,10 @@
 
   <!--/.Navbar -->
 
+
   <div class="px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
     <h1 class="display-6">Your Lists</h1>
-    <p class="lead">Quickly build an effective pricing table for your potential customers with this Bootstrap example.
-      It’s built with default Bootstrap components and utilities with little customization.</p>
+    <p class="lead">Here you can create multiple Movie Watchlists.</p>
     <!-- Button trigger modal -->
     <button type="button" class="btn1 btn-lg btn-danger" data-toggle="modal" data-target="#ModalCenter">
       Create List
@@ -111,8 +114,9 @@
 
 
 </body>
-
+<script src="js/conts.js"></script>
 <script src="js/request.js"></script>
 <script src="js/list.js"></script>
+
 
 </html>
