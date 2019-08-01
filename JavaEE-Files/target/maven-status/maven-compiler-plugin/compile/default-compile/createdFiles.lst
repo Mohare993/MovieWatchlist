@@ -14,6 +14,7 @@ com\qa\persistence\domain\MovieList.class
 com\qa\util\JSONUtil.class
 com\qa\persistence\repository\AccountRepository.class
 com\qa\persistence\domain\Movie.class
+com\qa\rest\CORSFilter.class
 com\qa\persistence\repository\AccountDBRepository.class
 com\qa\rest\JAXActivator.class
 com\qa\rest\MovieListController.class
