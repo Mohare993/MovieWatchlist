@@ -56,7 +56,7 @@ public class AccountController {
 
 	@POST
 	@Path("/login")
-	public String login(String account) {
+	public Response login(String account) {
 	try {
 		return Response.ok(this.service.login(account)).build();
 	} catch (AccountNotFoundException anfe) {
