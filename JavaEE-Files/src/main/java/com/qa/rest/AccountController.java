@@ -57,7 +57,13 @@ public class AccountController {
 	@POST
 	@Path("/login")
 	public String login(String account) {
-		return this.service.login(account);
+	try {
+		return Response.ok(this.service.login(account)).build();
+	} catch (AccountNotFoundException anfe) {
+		return Response.status(Status.CONFLICT).build();
+	} catch (Exception e) {
+		return Response.status(Status.BAD_REQUEST).build();
+	}
 	}
 
 	@GET
