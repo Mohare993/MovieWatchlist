@@ -64,7 +64,7 @@ public class AccountController {
 	} catch (Exception e) {
 		return Response.status(Status.BAD_REQUEST).build();
 	}
-	}
+}
 
 	@GET
 	@Path("/get/{id}")
